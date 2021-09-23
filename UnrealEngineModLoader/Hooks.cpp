@@ -59,9 +59,9 @@ namespace Hooks
 				}
 				GameStateClassInitNotRan = false;
 			}
-			for (int i = 0; i < Global::ModInfoList.size(); i++)
+			for (auto& i : Global::ModInfoList)
 			{
-				UE4::AActor* CurrentModActor = Global::ModInfoList[i].CurrentModActor;
+				UE4::AActor* CurrentModActor = i.CurrentModActor;
 				if (CurrentModActor->IsA(UE4::AActor::StaticClass()))
 				{
 					struct
@@ -71,7 +71,7 @@ namespace Hooks
 					
 					CurrentModActor->ProcessEvent(CurrentModActor->GetFunction("ModCleanUp"), &CleanParams);
 				}
-				Global::ModInfoList[i].CurrentModActor = nullptr;
+				i.CurrentModActor = nullptr;
 			}
 			if (GameProfile::SelectedGameProfile.StaticLoadObject)
 			{
